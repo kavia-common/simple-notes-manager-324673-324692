@@ -1,104 +1,462 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+
+  --text: #111827;
+  --muted: #64748b;
+
+  --border: rgba(15, 23, 42, 0.10);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  --primary: #3b82f6;
+  --primary-600: #2563eb;
+  --success: #06b6d4;
+  --danger: #ef4444;
+
+  --focus: rgba(59, 130, 246, 0.35);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+* {
+  box-sizing: border-box;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+html,
+body,
+#root {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: radial-gradient(1200px 600px at 10% 0%, rgba(59, 130, 246, 0.12), transparent 60%),
+    radial-gradient(1200px 600px at 80% 20%, rgba(6, 182, 212, 0.10), transparent 55%),
+    var(--bg);
+  color: var(--text);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.NotesApp {
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.AppTopbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 16px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.Brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+.BrandMark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(6, 182, 212, 0.14));
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  color: var(--primary-600);
+  font-weight: 800;
+}
+
+.BrandTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.BrandSubtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.TopbarRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.StatusPills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.Pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.pillInfo {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.18);
+  color: #1d4ed8;
+}
+
+.pillWarn {
+  background: rgba(234, 179, 8, 0.12);
+  border-color: rgba(234, 179, 8, 0.22);
+  color: #92400e;
+}
+
+.pillOk {
+  background: rgba(6, 182, 212, 0.10);
+  border-color: rgba(6, 182, 212, 0.22);
+  color: #0e7490;
+}
+
+.pillErr {
+  background: rgba(239, 68, 68, 0.10);
+  border-color: rgba(239, 68, 68, 0.22);
+  color: #b91c1c;
+}
+
+.TopbarActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.Btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.Btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.16);
 }
 
-.theme-toggle:active {
+.Btn:active {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+.BtnHint {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  padding-left: 2px;
+}
+
+.BtnPrimary {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(6, 182, 212, 0.95));
+  border-color: rgba(59, 130, 246, 0.35);
+  color: white;
+}
+
+.BtnPrimary:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.BtnDanger {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.20);
+  color: #b91c1c;
+}
+
+.AppShell {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 14px;
+  padding: 14px;
+  min-height: 0; /* allow children to scroll */
+}
+
+.Sidebar {
+  min-height: 0;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.SidebarHeader {
+  padding: 14px 14px 10px 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.SidebarTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.SidebarMeta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.SidebarSearch {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(249, 250, 251, 0.55);
+}
+
+.Input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: white;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.Input:focus {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+.NotesList {
+  padding: 10px;
+  overflow: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.NoteRow {
+  text-align: left;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.NoteRow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.18);
+}
+
+.NoteRow.active {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+.NoteRowTop {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.NoteRowTitle {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 230px;
+}
+
+.NoteRowTime {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.NoteRowPreview {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.EmptyState {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px dashed rgba(15, 23, 42, 0.18);
+  background: rgba(255, 255, 255, 0.7);
+  display: grid;
+  gap: 10px;
+}
+
+.EmptyTitle {
+  font-weight: 800;
+}
+
+.EmptyDesc {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.EditorPane {
+  min-height: 0;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.EditorEmpty {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.EditorEmptyCard {
+  width: min(520px, 100%);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  display: grid;
+  gap: 12px;
+}
+
+.EditorEmptyTitle {
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.EditorEmptyDesc {
+  color: var(--muted);
+}
+
+.Editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.EditorHeader {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(249, 250, 251, 0.55);
+}
+
+.TitleInput {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  outline: none;
+}
+
+.TitleInput:focus {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+.EditorMeta {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.ContentInput {
+  flex: 1;
+  width: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  background: white;
+  color: var(--text);
+  min-height: 0;
+}
+
+.EditorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(249, 250, 251, 0.55);
+}
+
+.FooterHint {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 980px) {
+  .AppShell {
+    grid-template-columns: 1fr;
+  }
+
+  .Sidebar {
+    max-height: 44vh;
+  }
+
+  .NoteRowTitle {
+    max-width: 100%;
   }
 }
